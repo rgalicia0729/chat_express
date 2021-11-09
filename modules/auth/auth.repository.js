@@ -1,6 +1,10 @@
 const { AuthModel } = require('./auth.model');
 
 class AuthRepository {
+  async findById(id) {
+    return await AuthModel.findOne({ _id: id });
+  }
+
   async findByEmail(email) {
     return await AuthModel.findOne({ email });
   }
