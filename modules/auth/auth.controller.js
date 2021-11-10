@@ -40,7 +40,7 @@ router.post('/signup', [
 
   res.status(201).json({
     ok: true,
-    response: result,
+    usuario: result,
     token: jwt.sign({ uid: result._id }, JWT_PRIVATE_KEY, { expiresIn: '12h' }),
   });
 
@@ -69,7 +69,7 @@ router.post('/signin', [
 
   res.status(200).json({
     ok: true,
-    response: usuario,
+    usuario,
     token: jwt.sign({ uid: usuario._id }, JWT_PRIVATE_KEY, { expiresIn: '12h' }),
   });
 
@@ -88,7 +88,7 @@ router.get('/current-user', validateAuth, async (req, res) => {
 
   res.status(200).json({
     ok: true,
-    response: usuario,
+    usuario,
     token: jwt.sign({ uid: usuario._id }, JWT_PRIVATE_KEY, { expiresIn: '12h' }),
   });
 });
