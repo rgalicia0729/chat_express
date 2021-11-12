@@ -13,8 +13,8 @@ const validateAuth = (req, res, next) => {
   }
 
   try {
-    const { uid } = jwt.verify(token, JWT_PRIVATE_KEY);
-    req.uid = uid;
+    const { id } = jwt.verify(token, JWT_PRIVATE_KEY);
+    req.id = id;
 
     next();
   } catch (err) {

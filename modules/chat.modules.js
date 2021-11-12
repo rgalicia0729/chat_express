@@ -1,4 +1,5 @@
-const authController = require('./auth/auth.controller')
+const authController = require('./auth/auth.controller');
+const usersControllers = require('./users/users.controller');
 
 class Modules {
 
@@ -8,6 +9,7 @@ class Modules {
 
   addModules() {
     this.app.use('/auth', authController);
+    this.app.use('/users', usersControllers);
   }
 }
 

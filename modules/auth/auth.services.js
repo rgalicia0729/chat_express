@@ -43,6 +43,26 @@ class AuthServices {
     return usuario;
 
   }
+
+  async userConnect(id = '') {
+    const authRepository = new AuthRepository();
+
+    const usuario = await authRepository.findById(id);
+    usuario.online = true;
+    await usuario.save();
+
+    return usuario;
+  }
+
+  async userDisconnect(id = '') {
+    const authRepository = new AuthRepository();
+
+    const usuario = await authRepository.findById(id);
+    usuario.online = false;
+    await usuario.save();
+
+    return usuario;
+  }
 }
 
 module.exports = { AuthServices }
