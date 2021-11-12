@@ -14,7 +14,7 @@ router.get('/', validateAuth, async (req, res) => {
 
   res.status(200).json({
     ok: true,
-    users
+    usuarios: users
   });
 });
 

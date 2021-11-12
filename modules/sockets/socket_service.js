@@ -14,6 +14,14 @@ io.on('connection', (client) => {
   const authService = new AuthServices();
   authService.userConnect(id);
 
+  // Agregar al usuario conectado a una sala
+  client.join(id);
+
+  client.on('personal-message', (payload) => {
+    payload.id = id;
+    io.to(payload.from).emit('personal-message', payload);
+  });
+
   client.on('disconnect', () => {
     authService.userDisconnect(id);
   });
