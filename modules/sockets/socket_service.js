@@ -1,5 +1,6 @@
 const { io } = require('../../app');
 const { AuthServices } = require('../../modules/auth/auth.services');
+const { MessagesServices } = require('../../modules/messages/messages.services');
 
 const { validateJWT } = require('../../helpers/jwt');
 
@@ -17,9 +18,13 @@ io.on('connection', (client) => {
   // Agregar al usuario conectado a una sala
   client.join(id);
 
-  client.on('personal-message', (payload) => {
-    payload.id = id;
-    io.to(payload.from).emit('personal-message', payload);
+  client.on('personal-message', async (payload) => {
+    payload.from = id;
+
+    const messagesServices = new MessagesServices();
+    await messagesServices.createMessage(payload);
+
+    io.to(payload.to).emit('personal-message', payload);
   });
 
   client.on('disconnect', () => {
